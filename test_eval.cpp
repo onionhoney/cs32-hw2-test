@@ -4,7 +4,6 @@
 #include "Map.h"
 #include <iostream>
 #include <string>
-#include "assert.h"
 #define check(EX) (handle(#EX, EX))
 
 using namespace std;

@@ -3,7 +3,21 @@
 
 #include <string>
 #include <iostream>
+#define check(EX) (handle(#EX, EX))
 using namespace std;
+
+string message;
+
+bool handle(const char *msg, bool result) {
+    if (result) {
+        message = "Success";
+        return true;
+    } else {
+        message = msg;
+        return false;
+    }
+}
+
 
 bool pathExists(std::string maze[], int nRows, int nCols,
                 int sr, int sc, int er, int ec);
@@ -33,7 +47,28 @@ bool test(int testIndex) {
 
     switch (testIndex) {
     case 0:
-        return pathExists(maze, 10,10, 6,4, 1,1);
+        return check(pathExists(maze, 10,10, 6,4, 1,1));
+
+    case 1:
+        return check(!pathExists(maze, 10,10, 7,1, 1,2));
+
+    case 2:
+        return check(pathExists(maze, 10,10, 6,3, 1,8));
+
+    case 3:
+        return check(pathExists(maze, 10,10, 4,1, 3,7));
+
+    case 4:
+        return check(pathExists(maze, 10,10, 7,8, 3,8));
+
+    case 5:
+        return check(!pathExists(maze, 10,10, 8,2, 6,5));
+
+    case 6:
+        return check(pathExists(maze, 10,10, 3,1, 4,6));
+
+    case 7:
+        return check(!pathExists(maze, 10,10, 7,8, 8,1));
 
     default:
         return true;
