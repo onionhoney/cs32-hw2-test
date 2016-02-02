@@ -10,13 +10,10 @@ declare -a files=(
 )
 
 function cleanup {
-    {
-        for f in "${files[@]}"; do
-            rm "$f"
-        done
-        rm testMap.out;
-    } >> /dev/null 2>&1
-    exit $1
+    make -s clean
+    for f in "${files[@]}"; do
+        rm -f "$f"
+    done
 }
 
 for f in "${files[@]}"; do
@@ -25,24 +22,27 @@ done
 
 
 # substitute out possible main function
-sed 's/\s*int\s+main(/int main__(/g' < mazestack.cpp > TMPmazestack.cpp
+sed 's/[[:blank:]]*int[[:blank:]]+main(/int main__[[:blank:]]*(/g' < mazestack.cpp > TMPmazestack.cpp
 mv TMPmazestack.cpp mazestack.cpp
 
-sed 's/\s*int\s+main(/int main__(/g' < mazequeue.cpp > TMPmazequeue.cpp
+sed 's/[[:blank:]]*int[[:blank:]]+main(/int main__[[:blank:]]*(/g' < mazequeue.cpp > TMPmazequeue.cpp
 mv TMPmazequeue.cpp mazequeue.cpp
 
-sed 's/\s*int\s+main(/int main__(/g' < eval.cpp > TMPeval.cpp
+sed 's/[[:blank:]]*int[[:blank:]]+main(/int main__[[:blank:]]*(/g' < eval.cpp > TMPeval.cpp
 mv TMPeval.cpp eval.cpp
 
 # compile and test
 make -s all
 
+echo "testing mazestack.cpp"
 ./stack.out
 echo
+echo "testing mazequeue.cpp"
 ./queue.out
 echo
+echo "testing eval.cpp"
 ./eval.out
+echo
 
-make -s clean
-
-cleanup 0
+echo "clean up ..."
+cleanup

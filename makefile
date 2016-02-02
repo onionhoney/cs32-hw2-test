@@ -14,21 +14,18 @@ all : stack queue eval
 
 stack : test_maze.o mazestack.o
 	$(CXX) $(CPPFLAGS) -o stack.out test_maze.o mazestack.o
-	echo "compiled with $(CXX)"
 
 
 queue : test_maze.o mazequeue.o
 	$(CXX) $(CPPFLAGS) -o queue.out test_maze.o mazequeue.o
-	echo "compiled with $(CXX)"
 
 
 eval : test_eval.o eval.o Map.o
 	$(CXX) $(CPPFLAGS) -o eval.out test_eval.o eval.o Map.o
-	echo "compiled with $(CXX)"
 
 
 clean :
-	rm *.o *.out
+	rm -f *.o *.out
 
 
 mazestack.o : mazestack.cpp

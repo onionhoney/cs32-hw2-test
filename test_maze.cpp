@@ -27,7 +27,9 @@ const int TOTAL_TEST_CASE = 10;
 bool test(int testIndex) {
     // testIndex : index of the test number
     // corresponding to switch statement
-    string maze[10] (MAZE);
+    string maze[10];
+    for (int i = 0; i < 10; ++i)
+        maze[i] = MAZE[i];
 
     switch (testIndex) {
     case 0:
