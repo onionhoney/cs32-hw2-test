@@ -10,7 +10,7 @@ int evaluate(std::string infix, const Map& values,
              std::string& postfix, int& result);
 
 
-const int TOTAL_TEST_CASE = 21;
+const int TOTAL_TEST_CASE = 22;
 
 bool test(int testIndex) {
     // testIndex : index of the test number
@@ -97,6 +97,10 @@ bool test(int testIndex) {
         return (evaluate("((a))", m, pf, answer) == 0  &&
                pf == "a"  &&  answer == 3);
 
+    case 21:
+        return (evaluate("    (a+y)  ", m, pf, answer) == 0 &&
+               pf == "ay+" && answer == 4);
+
     default:
         return true;
     }
@@ -117,7 +121,7 @@ int main() {
     }
 
     if (passed == TOTAL_TEST_CASE)
-        cout << "ALL TESTS PASSED" << endl;
+        cout << "****** ALL TESTS PASSED ******" << endl;
 
     cout << "====== TEST CASE FOR EVAL ENDS ======"
          << endl;

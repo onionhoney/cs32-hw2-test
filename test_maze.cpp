@@ -52,7 +52,7 @@ int main() {
     }
 
     if (passed == TOTAL_TEST_CASE)
-        cout << "ALL TESTS PASSED" << endl;
+        cout << "****** ALL TESTS PASSED ******" << endl;
 
     cout << "====== TEST CASE FOR MAZE ENDS ======"
          << endl;
