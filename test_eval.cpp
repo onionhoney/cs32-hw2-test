@@ -4,18 +4,16 @@
 #include "Map.h"
 #include <iostream>
 #include <string>
-#include "assert.h"
 #define check(EX) (handle(#EX, EX))
 
 using namespace std;
 string message;
 
-bool handle(const char *msg, bool result){
-    if (result){
+bool handle(const char *msg, bool result) {
+    if (result) {
         message = "Success";
-        return true;              
-    }
-    else{
+        return true;
+    } else {
         message = msg;
         return false;
     }
@@ -26,7 +24,7 @@ int evaluate(std::string infix, const Map& values,
              std::string& postfix, int& result);
 
 
-const int TOTAL_TEST_CASE = 22;
+const int TOTAL_TEST_CASE = 30;
 
 bool test(int testIndex) {
     // testIndex : index of the test number
@@ -51,8 +49,8 @@ bool test(int testIndex) {
                pf == "ae+"  &&  answer == -6);
 
     case 2:
-        return check(evaluate("     (a+e  )", m, pf, answer) == 0 &&
-               pf == "ae+"  &&  answer == -6);
+        return check(evaluate("     (a+e  ", m, pf, answer) == 1 &&
+               answer == 999);
 
     case 3:
         return check(evaluate("", m, pf, answer) == 1  &&  answer == 999);
@@ -117,6 +115,38 @@ bool test(int testIndex) {
         return check(evaluate("    (a+y)  ", m, pf, answer) == 0 &&
                pf == "ay+" && answer == 4);
 
+    case 22:
+        return check(evaluate(" (a + i   u)  ", m, pf, answer) == 1 &&
+               answer == 999);
+
+    case 23:
+        return check(evaluate("   )  a + y ", m, pf, answer) == 1 &&
+               answer == 999);
+
+    case 24:
+        return check(evaluate(" (  ) ", m, pf, answer) == 1 &&
+               answer == 999);
+
+    case 25:
+        return check(evaluate(" (-a +o  ) ", m, pf, answer) == 1 &&
+               answer == 999);
+
+    case 26:
+        return check(evaluate(" (a +o  )  u ", m, pf, answer) == 1 &&
+               answer == 999);
+
+    case 27:
+        return check(evaluate(" (a + u) *  i -  ", m, pf, answer) == 1 &&
+               answer == 999);
+
+    case 28:
+        return check(evaluate(" (a + u) *  i (  ", m, pf, answer) == 1 &&
+               answer == 999);
+
+    case 29:
+        return check(evaluate(" (a + u) *  i )  ", m, pf, answer) == 1 &&
+               answer == 999);
+
     default:
         return true;
     }
@@ -139,6 +169,9 @@ int main() {
 
     if (passed == TOTAL_TEST_CASE)
         cout << "****** ALL TESTS PASSED ******" << endl;
+    else
+        cout << "passed " << passed
+             << " out of " << TOTAL_TEST_CASE << endl;
 
     cout << "====== TEST CASE FOR EVAL ENDS ======"
          << endl;
