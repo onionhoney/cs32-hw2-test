@@ -1,6 +1,18 @@
 # CS32 Homework 2 Test
 A test for homework 2 for CS 32 in UCLA.
 
+---
+
+### Quick Start for Mac
+
+Click on **LaunchTest.app** to start your test.
+
+A Terminal window will be opened that shows your test result.
+
+See 'Running the test' section for an alternative way to start, if you're using
+Linux or if something goes wrong with LaunchTest.app.
+
+---
 
 ### DISCLAIMER
 
@@ -28,8 +40,9 @@ of your code before running the test.
 Run the test at your own discretion. The author does not
 take any responsibility in case of any accident.
 
+---
 
-### Running the test
+### Running the test 
 
 All code are expected to run in command line under
 a \*nix system.
@@ -40,6 +53,10 @@ are located
 `cd path/to/source/`
 
 Second, clone this repository
+
+`git clone https://github.com/onionhoney/cs32-hw2-test.git`
+
+Or if you want to try out the development branch:
 
 `git clone https://github.com/colinxy/cs32-hw2-test.git`
 
