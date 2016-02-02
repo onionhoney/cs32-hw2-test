@@ -5,9 +5,10 @@ A test for homework 2 for CS 32 in UCLA.
 
 ### Quick Start for Mac
 
-Click on **LaunchTest.app** to start your test.
-
-A Terminal window will be opened that shows your test result.
+1. Click [here](https://github.com/onionhoney/cs32-hw2-test/archive/master.zip) to download the zip file, and unzip it.
+2. Copy the unzipped folder (not the files) to the directory where all your source
+files are located.
+3. Open the folder and click on **LaunchTest.app** to start your test. A Terminal window will be opened that shows your test result.
 
 See 'Running the test' section for an alternative way to start, if you're using
 Linux or if something goes wrong with LaunchTest.app.
