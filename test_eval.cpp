@@ -24,7 +24,7 @@ int evaluate(std::string infix, const Map& values,
              std::string& postfix, int& result);
 
 
-const int TOTAL_TEST_CASE = 38;
+const int TOTAL_TEST_CASE = 40;
 
 bool test(int testIndex) {
     // testIndex : index of the test number
@@ -155,8 +155,8 @@ bool test(int testIndex) {
     // Existence in map must come after postfix conversion.
     
     case 30:
-        return check(evaluate(" A + a", m, pf, answer) == 2 && 
-            pf == "Aa+" && answer == 999);
+        return check(evaluate(" A + a", m, pf, answer) == 1 && 
+            answer == 999);
     
     // Some more tests with zero
     
@@ -167,9 +167,8 @@ bool test(int testIndex) {
     // Check if operators of equal precedence is sorted by order
     
     case 32:
-        return check(evaluate("z / a * z + z)", m, pf, answer) == 0 &&
+        return check(evaluate("(z / a * z + z)", m, pf, answer) == 0 &&
             pf == "za/z*z+" &&  answer == 0);
-    
     // More on parenthesis mismatch
     
     case 33:
@@ -191,6 +190,14 @@ bool test(int testIndex) {
     case 37:
         return check(evaluate(" a + ()i", m, pf, answer) == 1 &&
                 answer == 999);
+    // Operators that are not supposed to be accepted
+    case 38:
+        return check(evaluate(" a ^ i", m, pf, answer) == 1 && 
+                answer == 999);
+    // We should test longer cases that are like 32
+    case 39:
+        return check(evaluate("a / i *  e / o / e", m, pf, answer) == 0
+                && pf == "ai/e*o/e/" && answer == 0);
     default:
         return true;
     }
@@ -210,15 +217,14 @@ int main() {
         else
             ++passed;
     }
+    cout << "====== TEST CASE FOR EVAL ENDS ======"
+         << endl;
 
     if (passed == TOTAL_TEST_CASE)
         cout << "****** ALL TESTS PASSED ******" << endl;
     else
-        cout << "passed " << passed
-             << " out of " << TOTAL_TEST_CASE << endl;
-
-    cout << "====== TEST CASE FOR EVAL ENDS ======"
-         << endl;
+        cout << "PASSED " << passed
+             << " OUT OF " << TOTAL_TEST_CASE << endl;
 
     return 0;
 }
