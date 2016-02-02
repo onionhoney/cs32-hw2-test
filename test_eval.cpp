@@ -24,14 +24,14 @@ int evaluate(std::string infix, const Map& values,
              std::string& postfix, int& result);
 
 
-const int TOTAL_TEST_CASE = 30;
+const int TOTAL_TEST_CASE = 38;
 
 bool test(int testIndex) {
     // testIndex : index of the test number
     // corresponding to switch statement
 
-    char vars[] = { 'a', 'e', 'i', 'o', 'u', 'y', '#' };
-    int  vals[] = {  3,  -9,   6,   2,   4,   1  };
+    char vars[] = { 'A', 'a', 'e', 'i', 'o', 'u', 'y', 'z', '#' };
+    int  vals[] = { 10, 3,  -9,   6,   2,   4,   1,  0  };
     Map m;
     for (int k = 0; vars[k] != '#'; k++)
         m.insert(vars[k], vals[k]);
@@ -66,7 +66,10 @@ bool test(int testIndex) {
 
     case 7:
         return check(evaluate("ai", m, pf, answer) == 1  &&  answer == 999);
-
+        
+    // Postfix grammar is not accepted. Following the pseudocode, however,
+    // will probably neglect this.
+    
     case 8:
         return check(evaluate("ai+", m, pf, answer) == 1  &&  answer == 999);
 
@@ -81,7 +84,9 @@ bool test(int testIndex) {
 
     case 12:
         return check(evaluate("(a+(i-o)", m, pf, answer) == 1  &&  answer == 999);
-
+    
+    // Unary opertors not allowed
+    
     case 13:
         return check(evaluate("-a", m, pf, answer) == 1  &&  answer == 999);
 
@@ -146,7 +151,46 @@ bool test(int testIndex) {
     case 29:
         return check(evaluate(" (a + u) *  i )  ", m, pf, answer) == 1 &&
                answer == 999);
+    
+    // Existence in map must come after postfix conversion.
+    
+    case 30:
+        return check(evaluate(" A + a", m, pf, answer) == 2 && 
+            pf == "Aa+" && answer == 999);
+    
+    // Some more tests with zero
+    
+    case 31:
+        return check(evaluate(" /z", m, pf, answer) == 1 &&
+            answer == 999);
+    
+    // Check if operators of equal precedence is sorted by order
+    
+    case 32:
+        return check(evaluate("z / a * z + z)", m, pf, answer) == 0 &&
+            pf == "za/z*z+" &&  answer == 0);
+    
+    // More on parenthesis mismatch
+    
+    case 33:
+        return check(evaluate(" (a/)u", m, pf, answer) == 1 &&
+                answer == 999);
+    case 34:
+        return check(evaluate(" a(-u)", m, pf, answer) == 1 &&
+                answer == 999);
 
+    // Smallberg saith: those which contain'd 
+    // () shall not be allow'd in thy programme.
+    //
+    case 35:
+        return check(evaluate(" a + () + i", m, pf, answer) == 1 &&
+                answer == 999);
+    case 36:
+        return check(evaluate(" a + i()", m, pf, answer) == 1 &&
+                answer == 999);
+    case 37:
+        return check(evaluate(" a + ()i", m, pf, answer) == 1 &&
+                answer == 999);
     default:
         return true;
     }
