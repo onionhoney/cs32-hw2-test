@@ -22,13 +22,13 @@ done
 
 
 # substitute out possible main function
-sed 's/[[:blank:]]*int[[:blank:]]+main(/int main__[[:blank:]]*(/g' < mazestack.cpp > TMPmazestack.cpp
+sed 's/int  *main *(/int main__(/g' < mazestack.cpp > TMPmazestack.cpp
 mv TMPmazestack.cpp mazestack.cpp
 
-sed 's/[[:blank:]]*int[[:blank:]]+main(/int main__[[:blank:]]*(/g' < mazequeue.cpp > TMPmazequeue.cpp
+sed 's/int  *main *(/int main__(/g' < mazequeue.cpp > TMPmazequeue.cpp
 mv TMPmazequeue.cpp mazequeue.cpp
 
-sed 's/[[:blank:]]*int[[:blank:]]+main(/int main__[[:blank:]]*(/g' < eval.cpp > TMPeval.cpp
+sed 's/int  *main *(/int main__(/g' < eval.cpp > TMPeval.cpp
 mv TMPeval.cpp eval.cpp
 
 # compile and test
