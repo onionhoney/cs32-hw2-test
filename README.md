@@ -41,7 +41,7 @@ are located
 
 Second, clone this repository
 
-`git clone https://github.com/onionhoney/cs32-hw2-test.git`
+`git clone https://github.com/colinxy/cs32-hw2-test.git`
 
 Then, cd into this directory
 
